@@ -4,8 +4,16 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+
+def flutterGoogleMapKey = localProperties.getProperty('flutter.GoogleMapKey')
+if (flutterGoogleMapKey == null) {
+    flutterGoogleMapKey = ''
+}
 android {
     namespace = "com.example.ranwalk"
     compileSdk = flutter.compileSdkVersion
@@ -30,7 +38,10 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        buildConfigField "String", "GOOGLE_MAPS_API", properties['GOOGLE_MAPS_API']
+//        buildConfigField "String", "GOOGLE_API_KEY", properties['google_api_key']
+//
+//        manifestPlaceholders = [GOOGLE_API_KEY: google_api_key]
+         resValue "string", "GOOGLE_MAP_KEY", flutterGoogleMapKey
     }
 
     buildTypes {
