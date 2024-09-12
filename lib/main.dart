@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-void main() {
+void main(){
   runApp(const MyApp());
 }
 
@@ -47,24 +48,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Container(
+          child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: const CameraPosition(
+            target: LatLng(37.50508097213444, 126.95493077306663),
+            zoom: 18
+          )),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+
     );
   }
 }
